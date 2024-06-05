@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import AWS from 'aws-sdk';
 
+export const config = {
+  runtime: 'edge',
+};
+
 const S3_BUCKET = process.env.S3_BUCKET!;
 const REGION = process.env.AWS_REGION!;
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  region: REGION
+  region: REGION,
 });
 
 export async function POST(req: NextRequest) {
@@ -18,7 +22,7 @@ export async function POST(req: NextRequest) {
     Key: fileName,
     Expires: 60,
     ContentType: fileType,
-    ACL: 'public-read'
+    ACL: 'public-read',
   };
 
   try {
