@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import AWS from 'aws-sdk';
 
-export const config = {
-  runtime: 'edge',
-};
+export const runtime = 'edge';
 
 const S3_BUCKET = process.env.S3_BUCKET!;
 const REGION = process.env.AWS_REGION!;
