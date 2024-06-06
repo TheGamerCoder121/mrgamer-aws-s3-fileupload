@@ -127,7 +127,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or support, please contact Mr. Gamer at [email@example.com](mailto:email@example.com).
-```
-
-Feel free to customize this `README.md` file further to suit your specific needs and project details.
+For any questions or support, please contact Mr.Gamer at [me@nicklausvega.tech](mailto:me@nicklausvega.tech).
