@@ -5,15 +5,22 @@ import { useS3Upload } from "next-s3-upload";
 export default function UploadPage() {
   const { uploadToS3, files } = useS3Upload();
   const [status, setStatus] = useState<string>('');
-
+  
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setStatus(`Uploading ${file.name}...`);
-      await uploadToS3(file);
-      setStatus(`Uploaded ${file.name} successfully.`);
+    const selectedFiles = event.target.files;
+    if (selectedFiles && selectedFiles.length > 0) {
+      // Convert FileList to an array
+      const filesArray = Array.from(selectedFiles);
+      for (const file of filesArray) {
+        setStatus(`Uploading ${file.name}...`);
+        await uploadToS3(file);
+        setStatus(`Uploaded ${file.name} successfully.`);
+      }
+      setStatus('All files uploaded successfully.');
     }
   };
+  
+  
 
   return (
     <div className="min-h-screen flex flex-col justify-between items-center bg-gray-100 dark:bg-gray-900">
@@ -29,6 +36,7 @@ export default function UploadPage() {
             onChange={handleFileChange}
             type="file"
             accept="video/*"
+            multiple={true}
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-4 p-2"
           />
           {status && <p className="text-gray-700 dark:text-gray-300 mb-4">{status}</p>}
